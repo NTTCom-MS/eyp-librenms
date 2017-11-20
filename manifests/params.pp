@@ -1,15 +1,12 @@
 class librenms::params {
 
-  $package_name='librenms'
-  $service_name='librenms'
-
   case $::osfamily
   {
     'redhat':
     {
       case $::operatingsystemrelease
       {
-        /^[5-7].*$/:
+        /^[7].*$/:
         {
         }
         default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
@@ -17,6 +14,7 @@ class librenms::params {
     }
     'Debian':
     {
+      fail('Unsupported')
       case $::operatingsystem
       {
         'Ubuntu':

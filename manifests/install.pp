@@ -1,10 +1,9 @@
 class librenms::install inherits librenms {
 
-  if($librenms::manage_package)
-  {
-    package { $librenms::params::package_name:
-      ensure => $librenms::package_ensure,
-    }
-  }
+  # useradd librenms -d /opt/librenms -M -r
+  # usermod -a -G librenms nginx
+
+  # cd /opt
+  # git clone https://github.com/librenms/librenms.git librenms
 
 }

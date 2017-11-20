@@ -15,10 +15,10 @@ class librenms::service inherits librenms {
   {
     if($librenms::manage_service)
     {
-      service { $librenms::params::service_name:
-        ensure => $librenms::service_ensure,
-        enable => $librenms::service_enable,
-      }
+      # service { $librenms::params::service_name:
+      #   ensure => $librenms::service_ensure,
+      #   enable => $librenms::service_enable,
+      # }
     }
   }
 }
