@@ -17,6 +17,13 @@ class librenms::dependencies inherits librenms {
     require => Class['::mysql'],
   }
 
+  mysql::mycnf::client { 'default_client':
+    instance_name => 'global',
+    default       => true,
+    password      => $librenms::librenms_mysql_root_pw,
+    socket        => '/var/mysql/librenms/mysqld.sock',
+  }
+
   mysql::mycnf::mysqld{ 'librenms':
     port                => '3306',
     instancedir         => "/var/mysql/librenms",
