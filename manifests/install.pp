@@ -18,14 +18,38 @@ class librenms::install inherits librenms {
     require => Exec['librenms srcdir'],
   }
 
+  # unless  => "select TABLE_SCHEMA,TABLE_NAME from information_schema.tables where TABLE_NAME='puppet_control_table' and TABLE_SCHEMA='librenms'",
+  # select TABLE_SCHEMA,TABLE_NAME from information_schema.tables where TABLE_NAME='puppet_control_table' and TABLE_SCHEMA='librenms'
   mysql_sql { 'librenms db setup':
     command => "SOURCE ${librenms::srcdir}/librenms/dbinit.sql",
+    unless  => "SELECT ver from ${librenms::dbname}.${librenms::db_control_table}",
+    require => File["${librenms::srcdir}/librenms/dbinit.sql"],
+  }
+
+  # cd /opt
+  # git clone https://github.com/librenms/librenms.git librenms
+
+  exec { 'eyp-librenms which git':
+    command => 'which git',
+    unless  => 'which git',
+  }
+
+  exec { 'git librenms':
+    command => "git clone https://github.com/librenms/librenms.git ${librenms::basedir}",
+    creates => "${librenms::basedir}/README.md",
+    timeout => 0,
+    require => Exec['eyp-librenms which git'],
   }
 
   # useradd librenms -d /opt/librenms -M -r
   # usermod -a -G librenms nginx
-
-  # cd /opt
-  # git clone https://github.com/librenms/librenms.git librenms
+  user { $librenms::username:
+    ensure     => 'present',
+    managehome => false,
+    home       => $librenms::basedir,
+    system     => true,
+    groups     => $librenms::params::librenms_groups,
+    require    => Exec['git librenms'],
+  }
 
 }

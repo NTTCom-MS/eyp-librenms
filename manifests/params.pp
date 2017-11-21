@@ -8,6 +8,8 @@ class librenms::params {
       {
         /^[7].*$/:
         {
+          # https://docs.librenms.org/#Installation/Installation-CentOS-7-Nginx/
+          $librenms_groups = [ 'nginx' ]
         }
         default: { fail("Unsupported RHEL/CentOS version! - ${::operatingsystemrelease}")  }
       }
@@ -19,6 +21,7 @@ class librenms::params {
       {
         'Ubuntu':
         {
+          $librenms_groups = [ 'www-data' ]
           case $::operatingsystemrelease
           {
             /^14.*$/:

@@ -4,6 +4,8 @@ class librenms(
                 $service_ensure         = 'running',
                 $service_enable         = true,
                 $librenms_mysql_root_pw = 'password',
+                $username               = 'librenms',
+                $basedir                = '/opt/librenms',
                 $dbname                 = 'librenms',
                 $db_username            = 'librenms',
                 $db_password            = 'password',
@@ -11,6 +13,8 @@ class librenms(
                 $db_is_default_instance = true,
                 $db_control_table       = 'puppet_control_table',
                 $srcdir                 = '/usr/local/src',
+                $install_mysql_instance = true,
+                $install_nginx          = true,
               ) inherits librenms::params{
 
   class { '::librenms::dependencies': }
