@@ -9,6 +9,11 @@ class librenms::dependencies inherits librenms {
     class { 'nginx': }
   }
 
+  if($librenms::install_phpfpm)
+  {
+
+  }
+
   if($librenms::install_mysql_instance)
   {
     if($librenms::librenms_mysql_root_pw == 'password')
@@ -43,6 +48,16 @@ class librenms::dependencies inherits librenms {
       password          => $librenms::librenms_mysql_root_pw,
       add_default_mycnf => false,
     }
+
+    if($librenms::install_mysql_backup)
+    {
+      mysql::backup::mysqldump { 'librenms':
+        destination => $librenms::install_mysql_backup_destination,
+        logs        => $librenms::install_mysql_backup_logs,
+        file_per_db => false,
+      }
+    }
+
   }
 
 }
