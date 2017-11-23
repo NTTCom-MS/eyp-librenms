@@ -11,19 +11,10 @@ class librenms::front() inherits librenms {
 
   include ::librenms::code
 
-  # useradd librenms -d /opt/librenms -M -r
-  # usermod -a -G librenms nginx
-  user { $librenms::username:
-    ensure     => 'present',
-    managehome => false,
-    home       => $librenms::basedir,
-    system     => true,
-    groups     => $librenms::params::librenms_groups,
-    require    => Class['::librenms::code'],
-  }
-
   include ::php
-  
+
   include ::php::fpm
+
+  include ::nginx
 
 }
