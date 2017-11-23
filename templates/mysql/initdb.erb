@@ -1,9 +1,10 @@
-CREATE DATABASE <%= @dbname %> CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE <%= scope.lookupvar('librenms::dbname') %> CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-CREATE USER '<%= @db_username %>'@'<%= @db_host %>' IDENTIFIED BY '<%= @db_password %>';
+<% scope.lookupvar('librenms::db_username_hosts').each do |host| -%>
+CREATE USER '<%= scope.lookupvar('librenms::db_username') %>'@'<%= host %>' IDENTIFIED BY '<%= scope.lookupvar('librenms::db_password') %>';
+GRANT ALL PRIVILEGES ON <%= scope.lookupvar('librenms::dbname') %>.* TO '<%= scope.lookupvar('librenms::db_username') %>'@'<%= host %>';
+<% end -%>
 
-GRANT ALL PRIVILEGES ON <%= @dbname %>.* TO '<%= @db_username %>'@'<%= @db_host %>';
+CREATE TABLE <%= scope.lookupvar('librenms::dbname') %>.<%= scope.lookupvar('librenms::db_control_table') %> (ver INT PRIMARY KEY);
 
-CREATE TABLE <%= @dbname %>.<%= @db_control_table %> (ver INT PRIMARY KEY);
-
-INSERT INTO <%= @dbname %>.<%= @db_control_table %>(ver) values ('1');
+INSERT INTO <%= scope.lookupvar('librenms::dbname') %>.<%= scope.lookupvar('librenms::db_control_table') %>(ver) values ('1');
