@@ -44,7 +44,7 @@ class librenms::front() inherits librenms {
     location_match          => '~',
     include                 => [ 'fastcgi.conf' ],
     fastcgi_split_path_info => '^(.+\.php)(/.+)$',
-    fastcgi_pass            => 'unix:/var/run/php-fpm.sock',
+    fastcgi_pass            => 'unix:/var/run/php-fpm.librenms.sock',
   }
 
   nginx::location { "${librenms::domain_name} ht files":
