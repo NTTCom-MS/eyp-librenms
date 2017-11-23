@@ -1,6 +1,5 @@
-# 8===D~
 class librenms::poller() inherits librenms {
-
+  # 8===D~
   include ::librenms::code
 
   file { '/etc/cron.d/librenms':
