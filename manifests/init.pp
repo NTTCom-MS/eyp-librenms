@@ -16,5 +16,6 @@ class librenms(
                 $srcdir                           = '/usr/local/src',
                 $install_mysql_backup_destination = '/backup',
                 $install_mysql_backup_logs        = '/backup',
+                $domain_name                      = 'librenms.localhost',
               ) inherits librenms::params {
 }
