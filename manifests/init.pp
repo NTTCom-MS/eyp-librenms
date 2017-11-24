@@ -8,7 +8,7 @@ class librenms(
                 $basedir                          = '/opt/librenms',
                 $dbname                           = 'librenms',
                 $db_username                      = 'librenms',
-                $db_username_hosts                = [ 'localhost' ],
+                $db_username_hosts                = [ 'localhost', '127.0.0.1' ],
                 $db_password                      = 'password',
                 $db_host                          = 'localhost',
                 $db_is_default_instance           = true,

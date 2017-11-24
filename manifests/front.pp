@@ -21,7 +21,7 @@ class librenms::front() inherits librenms {
 
   php::fpm::pool { 'librenms':
     socketmode => '0666',
-    subscribe  => Php::Module[ [ 'php-gd', 'php-pear-MDB2-Driver-mysqli', 'php-mcrypt' ] ],
+    require    => Php::Module[ [ 'php-gd', 'php-pear-MDB2-Driver-mysqli', 'php-mcrypt' ] ],
   }
 
   include ::nginx
