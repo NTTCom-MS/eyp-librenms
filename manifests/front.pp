@@ -16,6 +16,8 @@ class librenms::front() inherits librenms {
   include ::php::fpm
 
   php::fpm::pool { 'librenms':
+    user  => 'nginx',
+    group => 'nginx',
   }
 
   include ::nginx
