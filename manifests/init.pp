@@ -11,11 +11,15 @@ class librenms(
                 $db_username_hosts                = [ 'localhost', '127.0.0.1' ],
                 $db_password                      = 'password',
                 $db_host                          = 'localhost',
+                $db_port                          = '3306',
+                $db_socket                        = undef,
                 $db_is_default_instance           = true,
                 $db_control_table                 = 'puppet_control_table',
                 $srcdir                           = '/usr/local/src',
                 $install_mysql_backup_destination = '/backup',
                 $install_mysql_backup_logs        = '/backup',
                 $domain_name                      = 'librenms.localhost',
+                $rrdcached_host                   = 'localhost',
+                $rrdcached_port                   = '42217',
               ) inherits librenms::params {
 }
