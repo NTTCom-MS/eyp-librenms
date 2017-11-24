@@ -9,6 +9,10 @@ class librenms::front() inherits librenms {
     creates => "${librenms::srcdir}/librenms",
   }
 
+  php::module { 'php-gd': }
+  php::module { 'php-pear-MDB2-Driver-mysqli': }
+  php::module { 'php-mcrypt': }
+
   include ::librenms::code
 
   include ::php
@@ -17,6 +21,7 @@ class librenms::front() inherits librenms {
 
   php::fpm::pool { 'librenms':
     socketmode => '0666',
+    subscribe  => Php::Module[ [ 'php-gd', 'php-pear-MDB2-Driver-mysqli', 'php-mcrypt' ] ],
   }
 
   include ::nginx
