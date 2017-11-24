@@ -5,6 +5,11 @@ class librenms::db() inherits librenms {
     fail('Please set MySQL root password: librenms_mysql_root_pw')
   }
 
+  if($librenms::db_password == 'password')
+  {
+    fail('Please set MySQL password for ${librenms::db_username}: db_password')
+  }
+
   include ::mysql
 
   mysql::mycnf { 'librenms':
