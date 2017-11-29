@@ -37,7 +37,7 @@ class librenms::code() inherits librenms {
     group   => $librenms::username,
     mode    => '0755',
     recurse => true,
-    purge   => true,
+    purge   => false,
     require => Exec['git librenms'],
   }
 
