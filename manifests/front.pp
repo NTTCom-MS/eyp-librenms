@@ -60,14 +60,5 @@ class librenms::front() inherits librenms {
     deny           => [ 'all' ],
   }
 
-  file { "${librenms::basedir}/config.php":
-    ensure  => 'present',
-    owner   => $librenms::username,
-    group   => $librenms::username,
-    mode    => '0600',
-    content => template("${module_name}/librenms/config.erb"),
-    require => Class['::librenms::code'],
-  }
-
 
 }

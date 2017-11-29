@@ -36,6 +36,17 @@ class librenms::code() inherits librenms {
     owner   => $librenms::username,
     group   => $librenms::username,
     mode    => '0755',
+    recurse => true,
+    purge   => true,
     require => Exec['git librenms'],
+  }
+
+  file { "${librenms::basedir}/config.php":
+    ensure  => 'present',
+    owner   => $librenms::username,
+    group   => $librenms::username,
+    mode    => '0644',
+    content => template("${module_name}/librenms/config.erb"),
+    require => File[$librenms::basedir],
   }
 }
