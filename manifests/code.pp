@@ -45,7 +45,7 @@ class librenms::code() inherits librenms {
     ensure  => 'present',
     owner   => $librenms::username,
     group   => $librenms::username,
-    mode    => '0642',
+    mode    => '0644',
     content => template("${module_name}/librenms/config.erb"),
     require => File[$librenms::basedir],
   }
