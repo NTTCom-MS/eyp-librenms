@@ -24,6 +24,7 @@ class librenms::db() inherits librenms {
   }
 
   mysql::mycnf::mysqld{ 'librenms':
+    sql_mode            => '',
     port                => '3306',
     instancedir         => "/var/mysql/librenms",
     datadir             => "/var/mysql/librenms/datadir",
