@@ -36,8 +36,6 @@ class librenms::code() inherits librenms {
     owner   => $librenms::username,
     group   => $librenms::username,
     mode    => '0755',
-    recurse => true,
-    purge   => false,
     require => Exec['git librenms'],
   }
 
@@ -45,7 +43,7 @@ class librenms::code() inherits librenms {
     ensure  => 'present',
     owner   => $librenms::username,
     group   => $librenms::username,
-    mode    => '0644',
+    mode    => '0640',
     content => template("${module_name}/librenms/config.erb"),
     require => File[$librenms::basedir],
   }
