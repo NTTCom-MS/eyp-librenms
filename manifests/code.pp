@@ -39,6 +39,24 @@ class librenms::code() inherits librenms {
     require => Exec['git librenms'],
   }
 
+  #/opt/librenms/rrd
+  file { "${librenms::basedir}/rrd":
+    ensure  => 'directory',
+    owner   => $librenms::username,
+    group   => $librenms::username,
+    mode    => '0775',
+    require => File[$librenms::basedir],
+  }
+
+  #  chmod ug+rw /opt/librenms/logs
+  file { "${librenms::basedir}/logs":
+    ensure  => 'directory',
+    owner   => $librenms::username,
+    group   => $librenms::username,
+    mode    => '0775',
+    require => File[$librenms::basedir],
+  }
+
   file { "${librenms::basedir}/config.php":
     ensure  => 'present',
     owner   => $librenms::username,
