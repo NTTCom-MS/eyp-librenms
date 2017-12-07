@@ -10,7 +10,7 @@ class librenms::front() inherits librenms {
 
   if($librenms::use_memcached)
   {
-    package { 'php-pecl-memcached':
+    package { $librenms::params::php_memcached_extesion:
       ensure  => 'present',
       require => Class['::php'],
       before  => Php::Fpm::Pool['librenms'],

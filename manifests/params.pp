@@ -4,6 +4,7 @@ class librenms::params {
   {
     'redhat':
     {
+      $php_memcached_extesion='php-pecl-memcached'
       case $::operatingsystemrelease
       {
         /^[7].*$/:
@@ -17,6 +18,7 @@ class librenms::params {
     'Debian':
     {
       fail('Unsupported')
+      $php_memcached_extesion='php5-memcached'
       case $::operatingsystem
       {
         'Ubuntu':
