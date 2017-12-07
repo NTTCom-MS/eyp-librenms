@@ -13,7 +13,8 @@ class librenms::front() inherits librenms {
     package { $librenms::params::php_memcached_extesion:
       ensure  => 'present',
       require => Class['::php'],
-      notify  => Php::Fpm::Pool['librenms'],
+      notify  => Class['::php::fpm'],
+      before  => Php::Fpm::Pool['librenms'],
     }
   }
 
