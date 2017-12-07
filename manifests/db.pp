@@ -35,7 +35,6 @@ class librenms::db() inherits librenms {
     relaylogdir         => "/var/mysql/librenms/relaylogs",
     log_error           => "/var/log/mysql/librenms/mysql-error.log",
     slow_query_log_file => "/var/log/mysql/librenms/mysql-slow.log",
-    notify              => Mysql::Community::Instance['librenms'],
   }
 
   mysql::community::instance { 'librenms':
