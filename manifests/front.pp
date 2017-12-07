@@ -8,6 +8,15 @@ class librenms::front() inherits librenms {
   php::module { 'php-pear-MDB2-Driver-mysqli': }
   php::module { 'php-mcrypt': }
 
+  if($librenms::use_memcached)
+  {
+    package { 'php-pecl-memcached':
+      ensure  => 'present',
+      require => Class['::php'],
+      before  => Php::Fpm::Pool['librenms'],
+    }
+  }
+
   include ::librenms::code
 
   include ::php
