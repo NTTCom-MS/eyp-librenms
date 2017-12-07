@@ -4,11 +4,6 @@ class librenms::front() inherits librenms {
     path => '/usr/sbin:/usr/bin:/sbin:/bin'
   }
 
-  exec { 'librenms srcdir':
-    command => "mkdir -p ${librenms::srcdir}/librenms",
-    creates => "${librenms::srcdir}/librenms",
-  }
-
   php::module { 'php-gd': }
   php::module { 'php-pear-MDB2-Driver-mysqli': }
   php::module { 'php-mcrypt': }

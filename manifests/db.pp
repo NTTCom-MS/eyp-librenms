@@ -10,6 +10,10 @@ class librenms::db() inherits librenms {
     fail('Please set MySQL password for ${librenms::db_username}: db_password')
   }
 
+  Exec {
+    path => '/usr/sbin:/usr/bin:/sbin:/bin'
+  }
+
   include ::mysql
 
   mysql::mycnf { 'librenms':
@@ -46,13 +50,18 @@ class librenms::db() inherits librenms {
     file_per_db => false,
   }
 
+  exec { 'librenms::db srcdir':
+    command => "mkdir -p ${librenms::srcdir}/librenms",
+    creates => "${librenms::srcdir}/librenms",
+  }
+
   file { "${librenms::srcdir}/librenms/dbinit.sql":
     ensure  => 'present',
     owner   => 'root',
     group   => 'root',
     mode    => '0640',
     content => template("${module_name}/mysql/initdb.erb"),
-    require => Exec['librenms srcdir'],
+    require => Exec['librenms::db srcdir'],
   }
 
   # unless  => "select TABLE_SCHEMA,TABLE_NAME from information_schema.tables where TABLE_NAME='puppet_control_table' and TABLE_SCHEMA='librenms'",
