@@ -1,6 +1,6 @@
 class librenms::memcached() inherits librenms {
 
-  class { 'memcached':
+  class { '::memcached':
     maxmem => $librenms::memcached_maxmem,
     port   => $librenms::memcached_port,
     listen => $librenms::memcached_listen,
