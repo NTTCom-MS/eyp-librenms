@@ -25,5 +25,8 @@ class librenms(
                 $memcached_port                   = '11211',
                 $memcached_listen                 = '127.0.0.1',
                 $memcached_maxcon                 = '1024',
+                $use_memcached                    = true,
+                $use_rrdcached                    = true,
+                $base_url                         = undef,
               ) inherits librenms::params {
 }
