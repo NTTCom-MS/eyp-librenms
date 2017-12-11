@@ -4,6 +4,8 @@ class librenms::poller() inherits librenms {
 
   include ::snmpd
 
+  include ::fping
+
   file { '/etc/cron.d/librenms':
     ensure  => 'link',
     target  => "${librenms::basedir}/librenms.nonroot.cron",
