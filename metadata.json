@@ -15,6 +15,7 @@
     {"name":"eyp/rrdtool","version_requirement":">= 0.1.0 < 0.2.0"},
     {"name":"eyp/memcached","version_requirement":">= 0.1.4 < 0.2.0"},
     {"name":"eyp/snmpd","version_requirement":">= 0.1.4 < 0.2.0"},
+    {"name":"eyp/fping","version_requirement":">= 0.1.0 < 0.2.0"},
     {"name":"eyp/eyplib","version_requirement":">= 0.1.0 < 0.2.0"}
   ],
   "operatingsystem_support": [
