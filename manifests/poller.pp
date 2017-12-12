@@ -1,5 +1,7 @@
 class librenms::poller() inherits librenms {
   # 8===D~
+  include ::librenms::code::runtime
+  
   include ::librenms::code
 
   include ::snmpd

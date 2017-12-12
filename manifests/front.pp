@@ -4,35 +4,9 @@ class librenms::front() inherits librenms {
     path => '/usr/sbin:/usr/bin:/sbin:/bin'
   }
 
-  php::module { 'php-gd':
-    tag => 'librenms'
-  }
-
-  php::module { 'php-pear-MDB2-Driver-mysqli':
-    tag => 'librenms'
-  }
-
-  php::module { 'php-mcrypt':
-    tag => 'librenms'
-  }
-
-  php::module { 'php-snmp':
-    tag => 'librenms'
-  }
-
-  if($librenms::use_memcached)
-  {
-    package { $librenms::params::php_memcached_extesion:
-      ensure  => 'present',
-      require => Class['::php'],
-      notify  => Class['::php::fpm'],
-      before  => Php::Fpm::Pool['librenms'],
-    }
-  }
+  include ::librenms::code::runtime
 
   include ::librenms::code
-
-  include ::php
 
   include ::php::fpm
 
