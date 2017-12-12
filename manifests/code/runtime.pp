@@ -8,9 +8,9 @@ class librenms::code::runtime inherits librenms {
     tag => 'librenms'
   }
 
-  # php::module { 'php-pear-MDB2-Driver-mysqli':
-  #   tag => 'librenms'
-  # }
+  php::module { 'php-mysqlnd':
+    tag => 'librenms'
+  }
 
   php::module { 'php-mcrypt':
     tag => 'librenms'
