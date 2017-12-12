@@ -20,11 +20,8 @@ class librenms::code::runtime inherits librenms {
 
   if($librenms::use_memcached)
   {
-    package { $librenms::params::php_memcached_extesion:
-      ensure  => 'present',
-      require => Class['::php'],
-      notify  => Class['::php::fpm'],
-      before  => Php::Fpm::Pool['librenms'],
+    php::module { $librenms::params::php_memcached_extesion:
+      tag => 'librenms'
     }
   }
 
