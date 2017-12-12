@@ -28,5 +28,6 @@ class librenms(
                 $use_memcached                    = true,
                 $use_rrdcached                    = true,
                 $base_url                         = undef,
+                $php_package_ius                  = 'php71u',
               ) inherits librenms::params {
 }

@@ -1,14 +1,16 @@
 class librenms::code::runtime inherits librenms {
 
-  include ::php
+  class { '::php':
+    use_php_package_prefix_ius => $librenms::php_package_ius,
+  }
 
   php::module { 'php-gd':
     tag => 'librenms'
   }
 
-  php::module { 'php-pear-MDB2-Driver-mysqli':
-    tag => 'librenms'
-  }
+  # php::module { 'php-pear-MDB2-Driver-mysqli':
+  #   tag => 'librenms'
+  # }
 
   php::module { 'php-mcrypt':
     tag => 'librenms'
