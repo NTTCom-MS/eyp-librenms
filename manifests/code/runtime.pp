@@ -4,6 +4,17 @@ class librenms::code::runtime inherits librenms {
     use_php_package_prefix_ius => $librenms::php_package_ius,
   }
 
+  # php71w-curl
+  # php71w-zip
+
+  php::module { 'php-xml':
+    tag => 'librenms'
+  }
+
+  php::module { 'php-process':
+    tag => 'librenms'
+  }
+
   php::module { 'php-gd':
     tag => 'librenms'
   }
