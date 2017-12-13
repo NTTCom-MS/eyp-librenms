@@ -29,5 +29,7 @@ class librenms(
                 $use_rrdcached                    = true,
                 $base_url                         = undef,
                 $php_package_ius                  = 'php71u',
+                $default_snmp_community           = 'public',
+                $daily_updates                    = false,
               ) inherits librenms::params {
 }

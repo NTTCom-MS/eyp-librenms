@@ -1,4 +1,6 @@
 <?php
+# puppet managed file
+
 ## Have a look in defaults.inc.php for examples of settings you can set here. DO NOT EDIT defaults.inc.php!
 
 ### Database config
@@ -42,7 +44,7 @@ $config['rrdcached']    = "<%= scope.lookupvar('librenms::rrdcached_host') %>:<%
 <% end -%>
 
 ### Default community
-$config['snmp']['community'] = array("public");
+$config['snmp']['community'] = array("<%= scope.lookupvar('librenms::default_snmp_community') %>");
 
 ### Authentication Model
 $config['auth_mechanism'] = "mysql"; # default, other options: ldap, http-auth
@@ -53,5 +55,10 @@ $config['auth_mechanism'] = "mysql"; # default, other options: ldap, http-auth
 #$config['nets'][] = "172.16.0.0/12";
 #$config['nets'][] = "192.168.0.0/16";
 
-# Uncomment the next line to disable daily updates
-#$config['update'] = 0;
+<% if scope.lookupvar('librenms::daily_updates') -%>
+# daily updates
+$config['update'] = 1;
+<% else -%>
+# disable daily updates
+$config['update'] = 0;
+<% end -%>
