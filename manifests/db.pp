@@ -30,11 +30,11 @@ class librenms::db() inherits librenms {
   mysql::mycnf::mysqld{ 'librenms':
     sql_mode            => '',
     port                => '3306',
-    instancedir         => "/var/mysql/librenms",
-    datadir             => "/var/mysql/librenms/datadir",
-    relaylogdir         => "/var/mysql/librenms/relaylogs",
-    log_error           => "/var/log/mysql/librenms/mysql-error.log",
-    slow_query_log_file => "/var/log/mysql/librenms/mysql-slow.log",
+    instancedir         => '/var/mysql/librenms',
+    datadir             => '/var/mysql/librenms/datadir',
+    relaylogdir         => '/var/mysql/librenms/relaylogs',
+    log_error           => '/var/log/mysql/librenms/mysql-error.log',
+    slow_query_log_file => '/var/log/mysql/librenms/mysql-slow.log',
   }
 
   mysql::community::instance { 'librenms':
