@@ -8,33 +8,40 @@ class librenms::code::runtime inherits librenms {
   # php71w-zip
 
   php::module { 'php-xml':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   php::module { 'php-process':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   php::module { 'php-gd':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   php::module { 'php-mysqlnd':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   php::module { 'php-mcrypt':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   php::module { 'php-snmp':
-    tag => 'librenms'
+    tag     => 'librenms',
+    require => Class['::php'],
   }
 
   if($librenms::use_memcached)
   {
     php::module { $librenms::params::php_memcached_extesion:
-      tag => 'librenms'
+      tag     => 'librenms',
+      require => Class['::php'],
     }
   }
 
