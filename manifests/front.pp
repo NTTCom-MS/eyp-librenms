@@ -15,6 +15,7 @@ class librenms::front() inherits librenms {
   ->
 
   php::fpm::pool { 'librenms':
+    user       => $librenms::username,
     group      => $librenms::username,
     socketmode => '0666',
   }
