@@ -1,0 +1,10 @@
+CREATE DATABASE <%= scope.lookupvar('librenms::dbname') %> CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+<% scope.lookupvar('librenms::db_username_hosts').each do |host| -%>
+CREATE USER '<%= scope.lookupvar('librenms::db_username') %>'@'<%= host %>' IDENTIFIED BY '<%= scope.lookupvar('librenms::db_password') %>';
+GRANT ALL PRIVILEGES ON <%= scope.lookupvar('librenms::dbname') %>.* TO '<%= scope.lookupvar('librenms::db_username') %>'@'<%= host %>';
+<% end -%>
+
+CREATE TABLE <%= scope.lookupvar('librenms::dbname') %>.<%= scope.lookupvar('librenms::db_control_table') %> (ver INT PRIMARY KEY);
+
+INSERT INTO <%= scope.lookupvar('librenms::dbname') %>.<%= scope.lookupvar('librenms::db_control_table') %>(ver) values ('1');

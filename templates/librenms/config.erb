@@ -1,0 +1,64 @@
+<?php
+# puppet managed file
+
+## Have a look in defaults.inc.php for examples of settings you can set here. DO NOT EDIT defaults.inc.php!
+
+### Database config
+$config['db_host'] = '<%= scope.lookupvar('librenms::db_host') %>';
+$config['db_port'] = '<%= scope.lookupvar('librenms::db_port') %>';
+$config['db_user'] = '<%= scope.lookupvar('librenms::db_username') %>';
+$config['db_pass'] = '<%= scope.lookupvar('librenms::db_password') %>';
+$config['db_name'] = '<%= scope.lookupvar('librenms::dbname') %>';
+<% if defined?(scope.lookupvar('librenms::db_socket')) -%>
+$config['db_socket'] = '<%= scope.lookupvar('librenms::db_socket') %>';
+<% end -%>
+
+// This is the user LibreNMS will run as
+//Please ensure this user is created and has the correct permissions to your install
+$config['user'] = '<%= scope.lookupvar('librenms::username') %>';
+
+<% if scope.lookupvar('librenms::use_memcached') -%>
+$config['memcached']['enable']  = TRUE;
+$config['memcached']['host']    = "<%= scope.lookupvar('librenms::memcached_listen') %>";
+$config['memcached']['port']    = <%= scope.lookupvar('librenms::memcached_port') %>;
+<% else -%>
+### Memcached config - We use this to store realtime usage
+$config['memcached']['enable']  = FALSE;
+<% end -%>
+
+### Locations - it is recommended to keep the default
+#$config['install_dir']  = "<%= scope.lookupvar('librenms::basedir') %>";
+
+### This should *only* be set if you want to *force* a particular hostname/port
+### It will prevent the web interface being usable form any other hostname
+<% if defined?(scope.lookupvar('librenms::base_url')) -%>
+$config['base_url']        = "<%= scope.lookupvar('librenms::base_url') %>";
+<% else -%>
+#$config['base_url']        = "http://librenms.lolcathost";
+<% end -%>
+
+<% if scope.lookupvar('librenms::use_memcached') -%>
+### Enable this to use rrdcached. Be sure rrd_dir is within the rrdcached dir
+### and that your web server has permission to talk to rrdcached.
+$config['rrdcached']    = "<%= scope.lookupvar('librenms::rrdcached_host') %>:<%= scope.lookupvar('librenms::rrdcached_port') %>";
+<% end -%>
+
+### Default community
+$config['snmp']['community'] = array("<%= scope.lookupvar('librenms::default_snmp_community') %>");
+
+### Authentication Model
+$config['auth_mechanism'] = "mysql"; # default, other options: ldap, http-auth
+#$config['http_auth_guest'] = "guest"; # remember to configure this user if you use http-auth
+
+### List of RFC1918 networks to allow scanning-based discovery
+#$config['nets'][] = "10.0.0.0/8";
+#$config['nets'][] = "172.16.0.0/12";
+#$config['nets'][] = "192.168.0.0/16";
+
+<% if scope.lookupvar('librenms::daily_updates') -%>
+# daily updates
+$config['update'] = 1;
+<% else -%>
+# disable daily updates
+$config['update'] = 0;
+<% end -%>
