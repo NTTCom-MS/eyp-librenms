@@ -1,4 +1,4 @@
-# librenms
+# librenms - DEPRECATED
 
 #### Table of Contents
 
